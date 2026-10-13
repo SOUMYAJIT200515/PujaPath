@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "PujaPath — Live Durga Puja Navigator",
+  "short_name": "PujaPath",
+  "description": "Smart live Durga Puja pandal hopping navigator for Kolkata with offline itinerary and pandal caching.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#b91c1c",
+  "background_color": "#fffbeb",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

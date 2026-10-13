@@ -1,0 +1,6 @@
+{
+  "name": "PujaPath — Live Durga Puja Pandal Hopping Navigator",
+  "description": "Smart live Durga Puja pandal hopping navigator for Kolkata with real-time GPS tracking, Google Maps route optimization, crowd estimation, group hopping, and budget tracking.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

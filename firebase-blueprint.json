@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User account info from Google Sign-In",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "User full name" },
+        "photoURL": { "type": "string", "description": "Profile picture URL" },
+        "createdAt": { "type": "string", "description": "Account creation timestamp" },
+        "updatedAt": { "type": "string", "description": "Last update timestamp" }
+      },
+      "required": ["uid", "email"]
+    },
+    "UserPreferences": {
+      "title": "User Preferences & Progress",
+      "description": "User's visited pandals, favorites, budget, and selected region",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner UID" },
+        "visitedPandalIds": { "type": "array", "description": "IDs of visited pandals" },
+        "favoritePandalIds": { "type": "array", "description": "IDs of favorited pandals" },
+        "selectedRegion": { "type": "string", "description": "Selected region filter (ALL, NORTH, CENTRAL, SOUTH)" },
+        "targetBudget": { "type": "number", "description": "User budget target in INR" },
+        "updatedAt": { "type": "string", "description": "Last updated timestamp" }
+      },
+      "required": ["userId"]
+    },
+    "CrowdReport": {
+      "title": "Crowd Report",
+      "description": "Real-time crowd reports for puja pandals",
+      "type": "object",
+      "properties": {
+        "pandalId": { "type": "string", "description": "ID of the pandal" },
+        "pandalName": { "type": "string", "description": "Name of the pandal" },
+        "crowdLevel": { "type": "string", "description": "Crowd level (low, moderate, high, very_high)" },
+        "waitTimeMinutes": { "type": "number", "description": "Estimated waiting time in minutes" },
+        "reporterName": { "type": "string", "description": "Name of the reporting user" },
+        "comment": { "type": "string", "description": "Optional crowd comment" },
+        "timestamp": { "type": "number", "description": "Epoch timestamp of report" },
+        "source": { "type": "string", "description": "Report source (community or official)" },
+        "userId": { "type": "string", "description": "UID of author" }
+      },
+      "required": ["pandalId", "crowdLevel", "timestamp", "userId"]
+    },
+    "UserItinerary": {
+      "title": "User Itinerary",
+      "description": "Custom route or itinerary planned by the user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of owner" },
+        "title": { "type": "string", "description": "Itinerary title" },
+        "regionScope": { "type": "string", "description": "Region filter used" },
+        "totalDistanceKm": { "type": "number", "description": "Total distance in km" },
+        "totalTimeMinutes": { "type": "number", "description": "Total time in minutes" },
+        "stops": { "type": "array", "description": "List of stops" },
+        "createdAt": { "type": "number", "description": "Creation timestamp" }
+      },
+      "required": ["userId", "title"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile document isolated per user"
+    },
+    "/users/{userId}/preferences/{prefId}": {
+      "schema": { "$ref": "#/entities/UserPreferences" },
+      "description": "User preferences, saved pandals, visited status"
+    },
+    "/users/{userId}/itineraries/{itineraryId}": {
+      "schema": { "$ref": "#/entities/UserItinerary" },
+      "description": "User saved itineraries"
+    },
+    "/crowdReports/{reportId}": {
+      "schema": { "$ref": "#/entities/CrowdReport" },
+      "description": "Public crowd reports submitted by registered users"
+    }
+  }
+}
